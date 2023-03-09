@@ -25,7 +25,7 @@ def parse_args():
     parser.add_argument("--model", help="model file path")
     parser.add_argument("--path", default="./demo", help="path to images or video")
     parser.add_argument("--camid", type=int, default=0, help="webcam demo camera id")
-    parser.add_argument("--show", type=bool, default=False, help="webcam demo camera id")
+    parser.add_argument("--show", type=bool, action="store_true", default=False, help="webcam demo camera id")
     parser.add_argument(
         "--save_result",
         action="store_true",
