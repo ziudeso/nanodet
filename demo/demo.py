@@ -72,10 +72,10 @@ class Predictor(object):
             results = self.model.inference(meta)
         return meta, results
 
-    def visualize(self, dets, meta, class_names, score_thres, wait=0):
+    def visualize(self, dets, meta, class_names, score_thres, wait=0, show=True):
         time1 = time.time()
         result_img = self.model.head.show_result(
-            meta["raw_img"][0], dets, class_names, score_thres=score_thres, show=True
+            meta["raw_img"][0], dets, class_names, score_thres=score_thres, show=show
         )
         print("viz time: {:.3f}s".format(time.time() - time1))
         return result_img
@@ -111,8 +111,7 @@ def main():
         files.sort()
         for image_name in files:
             meta, res = predictor.inference(image_name)
-            if (args.show):
-              result_image = predictor.visualize(res[0], meta, cfg.class_names, 0.35)
+            result_image = predictor.visualize(res[0], meta, cfg.class_names, 0.35, show=args.show)
             if args.save_result:
                 save_folder = os.path.join(
                     cfg.save_dir, time.strftime("%Y_%m_%d_%H_%M_%S", current_time)
